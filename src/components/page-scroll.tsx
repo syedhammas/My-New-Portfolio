@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function ScrollProgressBar() {
     const [scrollWidth, setScrollWidth] = useState(0);
-    const animationFrame = useRef(null);
+    const animationFrame = useRef<number | null>(null);
 
 
     useEffect(() => {
@@ -12,8 +12,7 @@ export default function ScrollProgressBar() {
             if (animationFrame.current) {
                 cancelAnimationFrame(animationFrame.current);
             }
-            // animationFrame.current =
-            requestAnimationFrame(() => {
+            animationFrame.current = requestAnimationFrame(() => {
                 const scrollTop = window.scrollY;
                 const docHeight = document.body.scrollHeight - window.innerHeight;
                 const progress = (scrollTop / docHeight) * 100;

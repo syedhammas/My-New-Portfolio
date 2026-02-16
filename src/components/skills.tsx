@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import {
-    FaReact, FaNodeJs, FaPython, FaGitAlt, FaDocker, FaAws
+    FaReact, FaNodeJs, FaGitAlt, FaDocker, FaAws
 } from "react-icons/fa";
 import {
-    SiNextdotjs, SiTailwindcss, SiTypescript, SiJavascript,
+    SiNextdotjs, SiTailwindcss, SiTypescript,
     SiFramer, SiPostgresql, SiFirebase, SiSupabase, SiFigma
 } from "react-icons/si";
 
@@ -66,7 +66,7 @@ export default function Skills() {
                                 {category.title}
                             </h4>
                             <div className="grid grid-cols-2 gap-6">
-                                {category.skills.map((skill, skillIndex) => (
+                                {category.skills.map((skill) => (
                                     <div key={skill.name} className="flex flex-col items-center gap-3 group/skill">
                                         <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-2xl group-hover/skill:bg-slate-700 transition-colors group-hover/skill:scale-110 duration-300">
                                             {skill.icon}

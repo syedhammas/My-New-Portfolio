@@ -117,6 +117,7 @@ const Globe: React.FC<GlobeProps> = ({
                 opacity: 1,
                 offset: [0, 0],
                 markers: [],
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onRender: (state: Record<string, any>) => {
                     if (!isDragging.current) {
                         phiRef.current += autoRotateSpeed;

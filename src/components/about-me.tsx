@@ -71,7 +71,7 @@ export default function About() {
                         <div className="aspect-square glass-card rounded-3xl p-8 flex flex-col justify-between overflow-hidden relative">
                             {/* Aesthetic code snippet or graphic */}
                             <div className="space-y-4 font-mono text-sm">
-                                <p className="text-slate-500">// My Tech Philosophy</p>
+                                <p className="text-slate-500">{"//"} My Tech Philosophy</p>
                                 <p className="text-blue-400">const <span className="text-white">philosophy</span> = &#123;</p>
                                 <p className="pl-4 text-purple-400">cleanCode: <span className="text-cyan-400">true</span>,</p>
                                 <p className="pl-4 text-purple-400">userExperience: <span className="text-cyan-400">&quot;topPriority&quot;</span>,</p>
