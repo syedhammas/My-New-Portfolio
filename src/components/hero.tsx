@@ -1,171 +1,108 @@
 "use client";
 
-import { SlidingLogoMarquee } from "./sliding-logo";
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiJavascript } from "react-icons/si";
-import Image from "next/image"; // ab use karenge <Image /> ke liye
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
-    const techIcons = [
-        {
-            id: "react",
-            content: (
-                <motion.div
-                    animate={{ y: [0, -15, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="text-blue-500 text-4xl lg:text-5xl"
-                >
-                    <FaReact />
-                </motion.div>
-            ),
-        },
-        {
-            id: "js",
-            content: (
-                <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 5, repeat: Infinity }}
-                    className="text-yellow-400 text-4xl lg:text-5xl"
-                >
-                    <SiJavascript />
-                </motion.div>
-            ),
-        },
-        {
-            id: "next",
-            content: (
-                <motion.div
-                    animate={{ y: [0, -12, 0] }}
-                    transition={{ duration: 6, repeat: Infinity }}
-                    className="text-white text-4xl lg:text-5xl"
-                >
-                    <SiNextdotjs />
-                </motion.div>
-            ),
-        },
-        {
-            id: "tailwind",
-            content: (
-                <motion.div
-                    animate={{ y: [0, -18, 0] }}
-                    transition={{ duration: 7, repeat: Infinity }}
-                    className="text-blue-500 text-4xl lg:text-5xl"
-                >
-                    <SiTailwindcss />
-                </motion.div>
-            ),
-        },
-        {
-            id: "node",
-            content: (
-                <motion.div
-                    animate={{ y: [0, -14, 0] }}
-                    transition={{ duration: 6, repeat: Infinity }}
-                    className="text-green-500 text-4xl lg:text-5xl"
-                >
-                    <FaNodeJs />
-                </motion.div>
-            ),
-        },
-    ];
-
     return (
-        <>
-            <section className="w-full flex items-center pt-32 px-4 md:pt-20 md:px-8 lg:px-20">
-                <div className="w-full max-w-7xl mx-auto">
-                    <div className="flex flex-col-reverse pt-16 lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 overflow-hidden bg-[#020617]">
+            {/* Background decoration - Subtle Glows */}
+            <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-                        {/* Left Side: Text */}
-                        <div className="flex-1 flex flex-col py-10 items-start justify-center max-w-2xl lg:pr-8">
-                            <motion.h1
-                                initial={{ opacity: 0, y: 40 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8 }}
-                                className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 leading-tight text-white"
-                            >
-                                Hello, I&apos;m <br />
-                                <span className="bg-[#C0AA83] shadow-[#C0AA83] text-transparent bg-clip-text ">
-                                    Syed Aaliyar
-                                </span>
-                            </motion.h1>
+            <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+                <div className="flex flex-col items-start space-y-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="px-4 py-2 rounded-full border border-slate-800 bg-slate-900/50 text-slate-400 text-sm font-medium"
+                    >
+                        Available for new projects
+                    </motion.div>
 
-                            {/* Sub-heading */}
-                            <motion.h2
-                                initial={{ opacity: 0, y: 50 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1.2 }}
-                                className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-white"
-                            >
-                                Front-End Developer | React &amp; Next.js Enthusiast
-                            </motion.h2>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-white"
+                    >
+                        Senior <span className="text-blue-500">Frontend</span> Architect<span className="text-blue-500">.</span>
+                    </motion.h1>
 
-                            <motion.p
-                                initial={{ opacity: 0, y: 40 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1.4 }}
-                                className="text-base md:text-lg lg:text-xl text-white leading-7 md:leading-8 mb-8 lg:mb-10"
-                            >
-                                I create <span className="text-white font-medium">modern, responsive, and scalable web apps</span> using cutting-edge technologies like{" "}
-                                <span className="text-white">JavaScript</span>,{" "}
-                                <span className="text-white">React</span>,{" "}
-                                <span className="text-white">Next.js</span>, and{" "}
-                                <span className="text-white">Tailwind CSS</span>.
-                                With <span className="font-medium text-white">1 year of hands-on experience</span>, I specialize in transforming Figma designs into pixel-perfect, production-ready solutions.
-                            </motion.p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="text-lg md:text-xl text-slate-400 max-w-lg leading-relaxed"
+                    >
+                        Hi, I&apos;m <span className="text-white font-bold">Syed Aaliyar</span>. Crafting immersive digital experiences with React, Next.js, and Framer Motion.
+                    </motion.p>
 
-                            {/* Action Buttons */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 50 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1.6 }}
-                                className="flex flex-wrap gap-4 lg:gap-6 mb-8 lg:mb-10"
-                            >
-                                <a
-                                    href="#projects"
-                                    className="px-6 lg:px-8 py-3 rounded-full bg-[#C0AA83] text-black font-semibold hover:scale-105 transition shadow-lg hover:shadow-[#D4A373]"
-                                >
-                                    View My Work
-                                </a>
-                                <a
-                                    href="#contact"
-                                    className="px-6 lg:px-8 py-3 rounded-full text-white border-2 border-[#C0AA83] font-semibold hover:bg-[#C0AA83] hover:text-black transition shadow-lg"
-                                >
-                                    Let&apos;s Connect
-                                </a>
-                            </motion.div>
-                        </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="flex flex-wrap gap-4"
+                    >
+                        <Link
+                            href="#projects"
+                            className="group px-8 py-4 rounded-full bg-blue-600 text-white font-bold flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20"
+                        >
+                            Recent Work
+                            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </Link>
+                        <Link
+                            href="#contact"
+                            className="px-8 py-4 rounded-full border border-slate-800 bg-slate-950/50 text-white font-bold hover:bg-slate-900 transition-all"
+                        >
+                            Let&apos;s Talk
+                        </Link>
+                    </motion.div>
+                </div>
 
-                        {/* Right Side: Profile Image */}
-                        <div className="flex-1 flex justify-center lg:justify-end items-center">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 1, delay: 0.4 }}
-                                className="relative"
-                            >
-                                <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden border-4 border-[#C0AA83]/60 shadow-2xl shadow-[#C0AA83]">
-                                    <Image
-                                        src="/hammas.jpg"
-                                        alt="Syed Hammas"
-                                        fill
-                                        className="object-cover"
-                                        priority
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 to-transparent"></div>
-                                </div>
-                            </motion.div>
-                        </div>
+                {/* Right Side: Image with Circles and Adjusted Position */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    className="relative h-[500px] lg:h-[700px] flex items-center justify-center lg:justify-end -translate-y-20 translate-x-10"
+                >
+                    {/* Decorative Circles (Background Effect) */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none">
+                        <div className="absolute inset-0 rounded-full border border-white/5 scale-[1]" />
+                        <div className="absolute inset-0 rounded-full border border-white/5 scale-[0.8]" />
+                        <div className="absolute inset-0 rounded-full border border-white/5 scale-[0.6]" />
+                        <div className="absolute inset-0 rounded-full border border-white/5 scale-[0.4]" />
+                        <div className="absolute inset-0 bg-blue-500/5 rounded-full blur-[80px]" />
                     </div>
-                </div>
-            </section>
 
-            {/* Floating Tech Icons */}
-            <div className="flex justify-center md:py-20 items-center">
-                <div className="flex justify-center items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16 pointer-events-none">
-                    <SlidingLogoMarquee items={techIcons} showControls={false} />
-                </div>
+                    <div className="relative w-full h-full">
+                        <Image
+                            src="/hammas.jpeg"
+                            alt="Syed Aaliyar"
+                            fill
+                            className="object-contain object-bottom transition-all duration-700 hover:scale-105"
+                            priority
+                        />
+                    </div>
+                </motion.div>
             </div>
-        </>
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, y: [0, 10, 0] }}
+                transition={{
+                    opacity: { delay: 1, duration: 1 },
+                    y: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            >
+                <div className="w-[1px] h-12 bg-gradient-to-b from-blue-500 to-transparent" />
+                <span className="text-[10px] uppercase tracking-[0.3em] text-slate-500 font-bold">Scroll</span>
+            </motion.div>
+        </section>
     );
 }

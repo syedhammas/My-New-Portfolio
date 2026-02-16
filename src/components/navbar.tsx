@@ -1,66 +1,133 @@
 "use client";
 
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-    FiHome,
-    FiUser,
-    FiCode,
-    FiLayers,
-    FiBriefcase,
-    FiMail,
-} from "react-icons/fi";
+import { Menu, X } from "lucide-react";
+
+const navItems = [
+    { name: "About", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
-    const navLinks = [
-        { name: "Home", path: "/", icon: <FiHome size={32} /> },
-        { name: "About", path: "#about", icon: <FiUser size={32} /> },
-        { name: "Skills", path: "#skills", icon: <FiCode size={32} /> },
-        { name: "Projects", path: "#projects", icon: <FiLayers size={32} /> },
-        { name: "Services", path: "#services", icon: <FiBriefcase size={32} /> },
-        { name: "Contact", path: "#contact", icon: <FiMail size={32} /> },
-    ];
+    const [scrolled, setScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Lock body scroll when mobile menu is open
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+    }, [mobileMenuOpen]);
 
     return (
-        <>
-            {/* Desktop Sidebar */}
-            <div className="hidden md:block fixed left-4 top-1/2 -translate-y-1/2 z-50">
-                <nav className="flex flex-col items-center space-y-20 px-4 py-6 border border-white/20 backdrop-blur-xl rounded-3xl shadow-lg">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.path}
-                            className="relative group text-white hover:text-[#C0AA83] transition-colors"
-                        >
-                            <div className="p-2 rounded-xl group-hover:bg-white/10 transition">
-                                {link.icon}
-                            </div>
-                            <span className="absolute left-12 top-1/2 -translate-y-1/2 px-2 py-1 text-sm text-white rounded-md opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
-                                {link.name}
-                            </span>
-                        </Link>
-                    ))}
-                </nav>
-            </div>
+        <motion.header
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 ${scrolled ? "py-4" : "py-6"}`}
+        >
+            <nav
+                className={`w-[95%] max-w-7xl px-6 py-3 rounded-full border transition-all duration-300 flex items-center justify-between ${scrolled || mobileMenuOpen
+                    ? "bg-black/60 backdrop-blur-xl border-white/10 shadow-2xl"
+                    : "bg-transparent border-transparent"
+                    }`}
+            >
+                <Link href="/" className="text-xl font-bold tracking-tighter text-white z-50">
+                    Syed Aaliyar<span className="text-blue-500">.</span>
+                </Link>
 
-            {/* Mobile Navbar */}
-            <div className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[90%]">
-                <nav className="flex justify-between items-center px-6 py-3 border border-white/20 backdrop-blur-xl rounded-2xl shadow-lg">
-                    {navLinks.map((link) => (
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-8">
+                    {navItems.map((item) => (
                         <Link
-                            key={link.name}
-                            href={link.path}
-                            className="relative group text-white hover:text-[#C0AA83] transition-colors"
+                            key={item.name}
+                            href={item.href}
+                            className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors"
                         >
-                            <div className="p-2 rounded-xl group-hover:bg-white/10 transition">
-                                {link.icon}
-                            </div>
-                            <span className="absolute left-12 top-1/2 -translate-y-1/2 px-2 py-1 text-sm text-white rounded-md opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
-                                {link.name}
-                            </span>
+                            {item.name}
                         </Link>
                     ))}
-                </nav>
-            </div>
-        </>
+                    <Link
+                        href="#contact"
+                        className="px-6 py-2 rounded-full border border-blue-500 text-blue-500 text-xs font-bold uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+                    >
+                        Hire Me
+                    </Link>
+                </div>
+
+                {/* Mobile Menu Toggle */}
+                <button
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    className="md:hidden text-white p-2 z-50 focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+            </nav>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute top-0 left-0 w-full h-screen bg-[#020617] z-40 flex flex-col items-center justify-center gap-8 md:hidden"
+                    >
+                        {/* Background decoration */}
+                        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+                        <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+                        <div className="flex flex-col items-center gap-8 relative z-10 text-center">
+                            {navItems.map((item, index) => (
+                                <motion.div
+                                    key={item.name}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 + index * 0.1 }}
+                                >
+                                    <Link
+                                        href={item.href}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="text-3xl font-bold text-white hover:text-blue-500 transition-colors"
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </motion.div>
+                            ))}
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 }}
+                                className="mt-4"
+                            >
+                                <Link
+                                    href="#contact"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="px-8 py-4 rounded-full bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 transition-all shadow-lg"
+                                >
+                                    Hire Me
+                                </Link>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.header>
     );
 }
